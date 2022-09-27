@@ -27,8 +27,8 @@ export type FetchPizzasArgs = {
 
 export interface PizzaSliceState {
   items: Pizza[];
-  status: Status;
   countItems: number;
+  status: Status;
 }
 
 export type FetchPizzasAnswer = {

@@ -26,8 +26,8 @@ export const fetchPizzas = createAsyncThunk<FetchPizzasAnswer, FetchPizzasArgs>(
 );
 
 const pizzaSlice = createSlice({
-  initialState,
   name: 'pizza',
+  initialState,
   reducers: {
     setItems(state, action: PayloadAction<Pizza[]>) {
       state.items = action.payload;

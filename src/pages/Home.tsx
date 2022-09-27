@@ -1,16 +1,14 @@
 import React, { useEffect, useCallback } from 'react';
-
-import { useSelector } from 'react-redux';
-import { useAppDispatch, RootState } from '../redux/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../redux/store';
 import { setCategoryId, setCurrentPage } from '../redux/filter/slice';
 import { Categories, Pagination, PizzaItems, Sort } from '../Components';
 
 const Home: React.FC = () => {
-  const dispatch = useAppDispatch();
-
+  const dispatch = useDispatch();
   const categoryId = useSelector((state: RootState) => state.filter.categoryId);
-  const countItems = useSelector((state: RootState) => state.pizza.countItems);
   const currentPage = useSelector((state: RootState) => state.filter.currentPage);
+  const countItems = useSelector((state: RootState) => state.pizza.countItems);
 
   const onChangeCategory = useCallback(
     (idx: number) => {
