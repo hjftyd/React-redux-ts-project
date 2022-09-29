@@ -3,9 +3,9 @@
 .categories {
   ul {
     display: flex;
+    padding-bottom: 10px;
 
     @media (max-width: 1024px) {
-      padding-bottom: 10px;
       max-width: 100%;
       overflow: auto;
     }
