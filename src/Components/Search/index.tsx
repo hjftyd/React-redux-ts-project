@@ -1,53 +1,59 @@
 import React, { useRef, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import debounce from 'lodash.debounce';
-
+import clearIcon from '../../assets/img/close-icon.svg';
+import searchIcon from '../../assets/img/search.svg';
 import styles from './Search.module.scss';
 import { setSearchValue } from '../../redux/filter/slice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Search: React.FC = () => {
+  const [value, setValue] = useState('');
   const dispatch = useDispatch();
-  const [value, setValue] = useState<string>('');
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputEl = useRef<HTMLInputElement>(null);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const onClickClear = () => {
     dispatch(setSearchValue(''));
     setValue('');
-    inputRef.current?.focus();
+    inputEl.current?.focus();
+  };
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateSearchValue(e.target.value);
+    setValue(e.target.value);
   };
 
   const updateSearchValue = useCallback(
     debounce((str: string) => {
+      if (pathname !== '/') {
+        navigate('/');
+      }
+
       dispatch(setSearchValue(str));
-    }, 450),
+    }, 500),
     [],
   );
 
-  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-    updateSearchValue(event.target.value);
-  };
-
   return (
-    <div className={styles.root}>
+    <div className={styles.wrapper}>
+      <img src={searchIcon} className={`${styles.icon} ${styles.searchIcon}`} alt="" />
       <input
-        ref={inputRef}
+        ref={inputEl}
+        className={styles.input}
+        placeholder="Поиск пиццы..."
         value={value}
         onChange={onChangeInput}
-        className={styles.input}
-        placeholder="Поиск пиццы"
       />
       {value && (
-        <svg
+        <img
+          src={clearIcon}
+          className={`${styles.icon} ${styles.clearIcon}`}
           onClick={onClickClear}
-          className={styles.clearIcon}
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
-        </svg>
+          alt="Clear search btn"
+        />
       )}
     </div>
   );
 };
-
-export default Search;
