@@ -7,7 +7,7 @@ $primary-color: #fe5f1e;
 
 :global {
   .rc-pagination {
-    &-item { 
+    &-item {
       font-size: 18px;
       text-align: center;
       width: 45px;
@@ -18,12 +18,12 @@ $primary-color: #fe5f1e;
       margin-right: 10px;
       cursor: pointer;
       display: inline-block;
-      
+
       a {
-        color: $primary-color
+        color: $primary-color;
       }
 
-      .rc-pagination-item-active a{
+      .rc-pagination-item-active a {
         color: #fff;
       }
 
@@ -45,8 +45,8 @@ $primary-color: #fe5f1e;
       }
     }
 
-.rc-pagination-prev .rc-pagination-item-link,
-.rc-pagination-next .rc-pagination-item-link {
+    .rc-pagination-prev .rc-pagination-item-link,
+    .rc-pagination-next .rc-pagination-item-link {
       font-size: 28px;
       text-align: center;
       width: 45px;
