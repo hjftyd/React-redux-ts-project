@@ -7,15 +7,15 @@ export const initialSort = {
   order: sortOrder.DESC,
 };
 
-const initialState: FilterSliceState = {
+export const initialState: FilterSliceState = {
   searchValue: '',
   categoryId: 0,
   currentPage: 1,
   sort: initialSort,
 };
 
-const filterSlice = createSlice({
-  name: 'filters',
+export const filterSlice = createSlice({
+  name: 'filter',
   initialState,
   reducers: {
     setCategoryId(state, action: PayloadAction<number>) {
