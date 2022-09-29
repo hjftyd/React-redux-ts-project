@@ -10,7 +10,6 @@ const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { totalPrice, items } = useSelector(selectCart);
 
-  // const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
   const totalCount = useMemo(
     () => items.reduce((sum: number, item) => sum + item.count, 0),
     [items],
@@ -20,10 +19,6 @@ const Cart: React.FC = () => {
     () => items.map((item) => <CartItem key={item.id} {...item} />),
     [items],
   );
-
-  // const onClickClear = () => {
-  //   dispatch(clearItems());
-  // };
 
   const onClickClear = useCallback(() => {
     dispatch(clearItems());
@@ -136,10 +131,14 @@ const Cart: React.FC = () => {
                 />
               </svg>
 
-              <span>Вернуться назад</span>
+              <span>
+                <span className="only-for-pc">Вернуться </span>назад
+              </span>
             </Link>
             <div className="button pay-btn">
-              <span>Оплатить сейчас</span>
+              <span>
+                Оплатить <span className="only-for-pc">сейчас</span>
+              </span>
             </div>
           </div>
         </div>
